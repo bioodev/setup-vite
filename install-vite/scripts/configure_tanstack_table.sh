@@ -5,10 +5,10 @@ npm install @tanstack/react-table
 echo "TanStack Table instalado."
 
 # Asegúrate de que el directorio de componentes existe
-mkdir -p ../src/components
+mkdir -p src/components
 
 # Ejemplo de configuración de TanStack Table
-cat <<EOL > ../src/components/TableComponent.jsx
+cat <<EOL > src/components/TableComponent.jsx
 import { useTable } from '@tanstack/react-table';
 
 const TableComponent = ({ data }) => {
