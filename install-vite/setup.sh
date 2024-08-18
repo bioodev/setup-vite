@@ -5,7 +5,7 @@ preguntar() {
     local pregunta="$1"
     local respuesta
 
-    read -p "$pregunta (y/n): " respuesta
+    read -p "$pregunta (s/n): " respuesta
     echo "$respuesta"
 }
 
@@ -67,26 +67,26 @@ EOL
 mkdir -p src/components
 
 # Configurar TanStack Query
-if [ "$RESPUESTA_QUERY" = "y" ]; then
+if [ "$RESPUESTA_QUERY" = "s" ]; then
     source ../scripts/configure_tanstack_query.sh
 fi
 
 # Configurar TanStack Router
-if [ "$RESPUESTA_ROUTER" = "y" ]; then
+if [ "$RESPUESTA_ROUTER" = "s" ]; then
     source ../scripts/configure_tanstack_router.sh
 fi
 
 # Configurar TanStack Table
-if [ "$RESPUESTA_TABLE" = "y" ]; then
+if [ "$RESPUESTA_TABLE" = "s" ]; then
     source ../scripts/configure_tanstack_table.sh
 fi
 
 # Configurar TanStack Form
-if [ "$RESPUESTA_FORM" = "y" ]; then
+if [ "$RESPUESTA_FORM" = "s" ]; then
     source ../scripts/configure_tanstack_form.sh
 fi
 
-if [ "$RESPUESTA_INICIAR_SERVIDOR" = "y" ]; then
+if [ "$RESPUESTA_INICIAR_SERVIDOR" = "s" ]; then
     npm install
     npm run dev &
 

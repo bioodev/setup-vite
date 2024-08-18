@@ -6,23 +6,22 @@ npm i -D @tanstack/router-plugin @tanstack/router-devtools
 echo "TanStack Router instalado."
 
 # Configuración de TanStack Router
-cat <<EOL > vite.config.ts
-import { defineConfig } from 'vite';
-import viteReact from '@vitejs/plugin-react';
+cat <<EOL > ../vite.config.ts
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
 
+
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    TanStackRouterVite(),
-    viteReact(),
-  ],
-});
+  plugins: [react(), TanStackRouterVite()],
+})
 EOL
 
-mkdir -p src/routes
+mkdir -p ../src/routes
 
 # Crear __root.tsx
-cat <<EOL > src/routes/__root.tsx
+cat <<EOL > ../src/routes/__root.tsx
 import { createRootRoute, Link, Outlet } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';
 
@@ -42,7 +41,7 @@ export const Route = createRootRoute({
 EOL
 
 # Crear index.lazy.tsx
-cat <<EOL > src/routes/index.lazy.tsx
+cat <<EOL > ../src/routes/index.lazy.tsx
 import { createLazyFileRoute } from '@tanstack/react-router';
 
 export const Route = createLazyFileRoute('/')({
@@ -59,7 +58,7 @@ function Index() {
 EOL
 
 # Crear about.lazy.tsx
-cat <<EOL > src/routes/about.lazy.tsx
+cat <<EOL > ../src/routes/about.lazy.tsx
 import { createLazyFileRoute } from '@tanstack/react-router';
 
 export const Route = createLazyFileRoute('/about')({
@@ -71,8 +70,18 @@ function About() {
 }
 EOL
 
+# Crear routeTree.gen.ts
+cat <<EOL > ../src/routeTree.gen.ts
+import { createRouteTree } from '@tanstack/react-router';
+import { Route as RootRoute } from './routes/__root';
+import { Route as IndexRoute } from './routes/index.lazy';
+import { Route as AboutRoute } from './routes/about.lazy';
+
+export const routeTree = createRouteTree([RootRoute, IndexRoute, AboutRoute]);
+EOL
+
 # Crear main.tsx
-cat <<EOL > src/main.tsx
+cat <<EOL > ../src/main.tsx
 import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
@@ -103,7 +112,7 @@ if (!rootElement.innerHTML) {
 EOL
 
 # Crear index.html
-cat <<EOL > index.html
+cat <<EOL > ../index.html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -117,3 +126,5 @@ cat <<EOL > index.html
   </body>
 </html>
 EOL
+
+echo "Configuración de TanStack Router completada."
